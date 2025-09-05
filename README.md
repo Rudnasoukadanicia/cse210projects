@@ -26,4 +26,4 @@ Thoroughly explain these concepts :
 
 Version control is a system that allows you to track, manage, and record changes made to project files, typically in software development. Its strength is that it records changes at any time, meaning that each change can be viewed by another programmer, corrected, or compared to previous versions using commit messages. In the event of an error, it is possible to revert to a previous version without losing any work, which significantly improves the security and reliability of the project.
 Version control also facilitates collaboration. This means that multiple developers can work simultaneously on different parts of the same project without disrupting each other's work.
-.
+
