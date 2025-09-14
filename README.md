@@ -1,9 +1,11 @@
 # cse210-ww-student-template
 This is the starter code for students in the worldwide content version of CSE 210.
 
-W02 : Explain Abstraction
 Rudna Danicia Souka
-Explain
+
+W02 : Explain Abstraction
+
+Explain  
 
 Abstraction is the process of simplifying complex ideas. Reducing the object plays a key role. As programmers, we constantly create and use abstractions. In practice, we create public classes and methods that represent actions, while hiding internal data structures and implementation details.
 
@@ -13,7 +15,7 @@ One of the main advantages of abstraction is coupling, meaning that the code tha
 
 Application
 
-I'll take this week's project as an example. In my program, responsibility is divided into small classes:
+In this week's project as an example. In my program, responsibility is divided into small classes:
 
 Entry — Represents a single log entry and knows how to display it.
 
