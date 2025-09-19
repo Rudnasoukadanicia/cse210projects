@@ -3,87 +3,66 @@ This is the starter code for students in the worldwide content version of CSE 21
 
 Rudna Danicia Souka
 
-W02 : Explain Abstraction
+W03 : Explain Encapsulation
 
-Explain  
+Meaning of Encapsulation :
 
-Abstraction is the process of simplifying complex ideas. Reducing the object plays a key role. As programmers, we constantly create and use abstractions. In practice, we create public classes and methods that represent actions, while hiding internal data structures and implementation details.
+Encapsulation is the act of enclosing something, such as in a capsule. This involves defining the behaviors we need for our classes and hiding the implementation details and preventing other parts of the program from accessing these details.
 
-Benefits
+Benefit Of Encapsulation:
 
-One of the main advantages of abstraction is coupling, meaning that the code that uses a class depends only on its public interface.
+They protect data by making fields private, preventing external code from directly modifying the state of an object, and controlling access, i.e. you decide which parts of the code are publicly accessible and which remain hidden private.
 
-Application
+Application of Encapsulation :
 
-In this week's project as an example. In my program, responsibility is divided into small classes:
+In this week's project, the program involves helping people memorize words. We created three classes. The Word class keeps the word's text and hidden state private.
+The only way to change the hidden state is to call the public Hide() method, and the only way to display it is via GetDisplayText().
+This ensures that words are always displayed or hidden consistently, regardless of their location in the program.
 
-Entry — Represents a single log entry and knows how to display it.
+Code Exemple :
 
-Journal — Stores entries and provides methods for adding, displaying, saving, and loading.
+This code demonstrates encapsulation, as the _text and _isHidden fields are private and cannot be accessed or modified except via the public Hide() and GetDisplayText() methods.
 
-PromptGenerator — Contains the prompt data and exposes a method to return a random prompt.
 
-Since each class only exposes a few public methods, the Program class can operate at a high level, such as creating a prompt, adding an entry, and saving.
-
-Code examples (demonstrating abstraction)
-
-Log hides the list and exposes simple operations:
-
-public class Journal
+public class Word
 {
-private List<Entry> _entries = new List<Entry>();
+    private string _text;
+    private bool _isHidden;
 
-public void AddEntry(Entry entry)
-{
-_entries.Add(entry);
+    public Word(string text)
+    {
+        _text = text;
+        _isHidden = false;
+    }
+
+    public void Hide()
+    {
+        _isHidden = true;
+    }
+    public void Show()
+    {
+        _isHidden = false;
+    }
+    public bool IsHidden()
+    {
+        return _isHidden;
+    }
+
+    public string  GetDisplayText()
+    {
+        if (_isHidden)
+        {
+            return new string('_', _text.Length);
+        }
+        else
+        {
+            return _text;
+        }
+    }
 }
 
-public void DisplayAll()
-{
-foreach (Entry entry in _entries)
-{
-entry.Display();
-}
-}
+Explain Concepts :
 
-public void SaveToFile(string filename) { /* File logic hidden here */ }
-public void LoadFromFile(string filename) { /* Parsing hidden here */ }
-}
-
-
-PromptGenerator hides the prompt storage and only exposes GetRandomPrompt():
-
-
-public class PromptGenerator
-{
-private List<string> _prompts = new List<string>();
-
-public PromptGenerator()
-{
-_prompts.Add("Who did I interact with most interestingly today?"); // ...
-}
-
-public string GetRandomPrompt()
-{
-return _prompts[new Random().Next(_prompts.Count)];
-}
-}
-
-
-The Program uses these public methods and never directly manipulates _entries:
-
-
-Journal journal = new Journal();
-PromptGenerator promptGenerator = new PromptGenerator();
-
-Entry newEntry = new Entry();
-newEntry._date = DateTime.Now.ToShortDateString();
-newEntry._promptText = promptGenerator.GetRandomPrompt();
-newEntry._entryText = Console.ReadLine();
-journal.AddEntry(newEntry); // The program doesn't care how the Journal stores entries
-
-
-Explain these concepts
-
-The code demonstrates abstraction by separating responsibilities and exposing small, relevant APIs. One improvement to strengthen abstraction is to encapsulate data fields. This prevents external code from directly modifying internal state, thus preserving the class contract.
-So abstraction simplifies how other code interacts with a component, makes it easier to modify and reason about our program, and is clearly enforced in the Journal program by the "Journal", "Entry", and "PromptGenerator" classes.
+In Summary Encapsulation is the second principle of class-based programming. A key element of encapsulation is the hiding or controlling of access to information. Knowing how to use access modifiers properly will protect us from any intrusion into our programs.
+It also aims to ensure that our classes define the appropriate behaviors and then internally manage the details necessary to implement them.
+Encapsulation adds security, clarity, and consistency to your program.
