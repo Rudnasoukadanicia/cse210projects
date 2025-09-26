@@ -1,68 +1,104 @@
 # cse210-ww-student-template
 This is the starter code for students in the worldwide content version of CSE 210.
 
-Rudna Danicia Souka
+W04 : Foundation program design
 
-W03 : Explain Encapsulation
+Program 1 : Abstraction with Youtube Videos
 
-Meaning of Encapsulation :
+Objective :
 
-Encapsulation is the act of enclosing something, such as in a capsule. This involves defining the behaviors we need for our classes and hiding the implementation details and preventing other parts of the program from accessing these details.
+This program stores information about Youtube videos , including the title , autor, duration and comments attached to them. It displays information about each video and allows the user to view all comments.
 
-Benefit Of Encapsulation:
+Classes and their responsibilities:
 
-They protect data by making fields private, preventing external code from directly modifying the state of an object, and controlling access, i.e. you decide which parts of the code are publicly accessible and which remain hidden private.
+Video: Stores the title, author, duration, and list of comments. Displays video information and counts comments.
 
-Application of Encapsulation :
+Comment: Stores the author and comment text. Displays the comment.
 
-In this week's project, the program involves helping people memorize words. We created three classes. The Word class keeps the word's text and hidden state private.
-The only way to change the hidden state is to call the public Hide() method, and the only way to display it is via GetDisplayText().
-This ensures that words are always displayed or hidden consistently, regardless of their location in the program.
+Attributes and Methods:
 
-Code Exemple :
+For video (Attributes):
 
-This code demonstrates encapsulation, as the _text and _isHidden fields are private and cannot be accessed or modified except via the public Hide() and GetDisplayText() methods.
+_title: string
+_author: string
+_length: int
+_comments: List<Comment>
 
+For video (Methods):
 
-public class Word
-{
-    private string _text;
-    private bool _isHidden;
+DisplayVideoInfo()
+GetCommentCount()
+DisplayAllComments()
 
-    public Word(string text)
-    {
-        _text = text;
-        _isHidden = false;
-    }
+For Comment(Attributes):
 
-    public void Hide()
-    {
-        _isHidden = true;
-    }
-    public void Show()
-    {
-        _isHidden = false;
-    }
-    public bool IsHidden()
-    {
-        return _isHidden;
-    }
+_author: string
+_text: string
 
-    public string  GetDisplayText()
-    {
-        if (_isHidden)
-        {
-            return new string('_', _text.Length);
-        }
-        else
-        {
-            return _text;
-        }
-    }
-}
+For Comment(Methods):
 
-Explain Concepts :
+DisplayComment()
 
-In Summary Encapsulation is the second principle of class-based programming. A key element of encapsulation is the hiding or controlling of access to information. Knowing how to use access modifiers properly will protect us from any intrusion into our programs.
-It also aims to ensure that our classes define the appropriate behaviors and then internally manage the details necessary to implement them.
-Encapsulation adds security, clarity, and consistency to your program.
+The program flow is to create a list of video objects for each video and add multyiple comments.
+
+Program 2 : Encapsulation with Online Ordering
+
+Objective :
+
+This program simulates an online order. It stores customer and product data, calculates the total cost, including shipping, and displays the packaging and shipping labels.
+
+Classes and their responsibilities:
+
+Order: Store customer and product list. Calculates the total price and prints the labels.
+
+Product: Store name, product ID, price, quantity, and returns the total price per product.
+
+Customer: Store name and address. Determines if the customer resides in the United States.
+
+Address: Store street, city, state, and country. Returns the full address.
+Attributes and Methods
+
+For Order (Attributes):
+
+_customer : Customer
+_products: List<Product>
+
+For Order (Methods):
+
+GetTotalPrice()
+GetPackingLabel()
+GetShippingLabel()
+
+For Product (Attributes):
+
+_name: string
+_id: string
+_price : float
+_quantity : integer
+
+For Product (Methods):
+
+GetTotalPrice()
+GetProductInfo()
+
+For Customer (Attributes):
+
+_name: sting
+_adress: Address
+
+For Customer (Methods):
+
+LivesInUsa()
+
+For Address (Attributes):
+
+_street: string
+_city: string
+_state: string
+_contry: string
+
+For Address (Methods):
+
+GetFullAddress()
+
+The program flow is to create a Customer object with an address. Also create several Product objects and add them to an order.
