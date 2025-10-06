@@ -1,104 +1,82 @@
 # cse210-ww-student-template
 This is the starter code for students in the worldwide content version of CSE 210.
 
-W04 : Foundation program design
+W05 : Explain Inheritance
 
-Program 1 : Abstraction with Youtube Videos
+Explain the meaning of Inheritance:
 
-Objective :
+Inheritance is the ability for me class to obtain the attributes and methods of another class directly .It follows the same idea of people inheriting certain characteristices from their 
 
-This program stores information about Youtube videos , including the title , autor, duration and comments attached to them. It displays information about each video and allows the user to view all comments.
+Highlight a benefit of Inheritance:
 
-Classes and their responsibilities:
+Inheritance allows a class to reuse or inherit code from another class, thus reducing duplication and simplifying program maintenance. It also allows for organization. Shared behaviors and attributes can be placed in a base class. Finally, it makes programs more flexible because new classes can be created by extending existing classes without modifying the original code.
 
-Video: Stores the title, author, duration, and list of comments. Displays video information and counts comments.
+Provide an application of Inheritance:
 
-Comment: Stores the author and comment text. Displays the comment.
+In the Mindfulness Week program, we can use a base class called Activity, with shared attributes like Name, Description, and Duration, as well as shared methods like StartMessage() and EndMessage(). Then we create derived classes, such as BreathingActivity, ReflectingActivity, and ListingActivity, that inherit from Activity. Each derived class can have its own behavior, while still reusing Activity's shared code.
 
-Attributes and Methods:
+Example Code :
 
-For video (Attributes):
+Here is some sample code from the program that illustrates inheritance
 
-_title: string
-_author: string
-_length: int
-_comments: List<Comment>
+using System;
 
-For video (Methods):
+public class Activity
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public int Duration { get; set; }
 
-DisplayVideoInfo()
-GetCommentCount()
-DisplayAllComments()
+    public Activity(string name, string description, int duration)
+    {
+        Name = name;
+        Description = description;
+        Duration = duration;
+    }
 
-For Comment(Attributes):
+    public void StartMessage()
+    {
+        Console.WriteLine($"Starting {Name} for {Duration} seconds...");
+    }
 
-_author: string
-_text: string
+    public void EndMessage()
+    {
+        Console.WriteLine($"You have completed {Name}. Well done!");
+    }
+}
 
-For Comment(Methods):
+// Derived class
+public class BreathingActivity : Activity
+{
+    public BreathingActivity(string name, string description, int duration)
+        : base(name, description, duration)
+    {
+    }
 
-DisplayComment()
+    public void Run()
+    {
+        StartMessage();
+        Console.WriteLine("Breathe in...");
+        Console.WriteLine("Breathe out...");
+        EndMessage();
+    }
+}
 
-The program flow is to create a list of video objects for each video and add multyiple comments.
+// Example usage
+class Program
+{
+    static void Main()
+    {
+        BreathingActivity breathing = new BreathingActivity(
+            "Breathing Activity",
+            "Helps you relax by focusing on breathing slowly.",
+            10
+        );
 
-Program 2 : Encapsulation with Online Ordering
+        breathing.Run();
+    }
+}
 
-Objective :
+Thoroughly explain these concepts:
 
-This program simulates an online order. It stores customer and product data, calculates the total cost, including shipping, and displays the packaging and shipping labels.
-
-Classes and their responsibilities:
-
-Order: Store customer and product list. Calculates the total price and prints the labels.
-
-Product: Store name, product ID, price, quantity, and returns the total price per product.
-
-Customer: Store name and address. Determines if the customer resides in the United States.
-
-Address: Store street, city, state, and country. Returns the full address.
-Attributes and Methods
-
-For Order (Attributes):
-
-_customer : Customer
-_products: List<Product>
-
-For Order (Methods):
-
-GetTotalPrice()
-GetPackingLabel()
-GetShippingLabel()
-
-For Product (Attributes):
-
-_name: string
-_id: string
-_price : float
-_quantity : integer
-
-For Product (Methods):
-
-GetTotalPrice()
-GetProductInfo()
-
-For Customer (Attributes):
-
-_name: sting
-_adress: Address
-
-For Customer (Methods):
-
-LivesInUsa()
-
-For Address (Attributes):
-
-_street: string
-_city: string
-_state: string
-_contry: string
-
-For Address (Methods):
-
-GetFullAddress()
-
-The program flow is to create a Customer object with an address. Also create several Product objects and add them to an order.
+Inheritance is a fundamental principle of object-oriented programming that allows one class to reuse the attributes and methods of another class. The class that provides the behaviors is called the base class or superclass, while the class that inherits is called the derived class or subclass. Inheritance reduces code duplication, facilitates maintenance, and allows for more flexible programs. Inheritance is a powerful principle that can save many hours of coding.
