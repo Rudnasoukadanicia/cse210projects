@@ -1,9 +1,9 @@
 # cse210-ww-student-template
 This is the starter code for students in the worldwide content version of CSE 210.
 
-W06 : Explain Polymorphism
+W06: Explain Polymorphism
 
-Explain the meaning of Polymorphism
+Explain the meaning of polymorphism
 
 Polymorphism is the ability to take many forms. In programming, this principle is illustrated by the different behavior of the same line of code depending on the context. In other words, it allows a single interface to represent different underlying forms.
 
@@ -16,6 +16,7 @@ Provide an application of polymorphism
 In the Eternal Quest program, we have a base class "Goal" and derived classes "SimpleGoal", "EternalGoal", and "CheckListGoal". All of these classes have the "RecordEvent()" method. When we call "RecordEvent()" on a "Goal" object, the program automatically executes the correct version of the method depending on the goal type. This is polymorphism: the same method name behaves differently for each goal type.
 
 Code Example
+
 
 using System;
 using System.Collections.Generic;
@@ -104,20 +105,20 @@ return _points;
 // Example Usage
 Program Class
 {
-    static void Main()
-    {
-    List<Goal> goals = new List<Goal>
-    {
-    new SimpleGoal("Read Scriptures", "Read a Chapter", 50),
-    new EternalGoal("Meditate", "Daily Meditation", 20),
-    new CheckListGoal("Temple Visits", "Visit the temple 5 times", 10, 5, 50)
-    };
+static void Main()
+{
+List<Goal> goals = new List<Goal>
+{
+new SimpleGoal("Read Scriptures", "Read a Chapter", 50),
+new EternalGoal("Meditate", "Daily Meditation", 20),
+new CheckListGoal("Temple Visits", "Visit the temple 5 times", 10, 5, 50)
+};
 
-    foreach (Goal goal in goals)
-    {
-    goal.RecordEvent(); // Polymorphism: The same method behaves differently
-    }}
+foreach (Goal goal in goals)
+{
+goal.RecordEvent(); // Polymorphism: The same method behaves differently
 }
+}}
 
 Explain these concepts in detail
 
