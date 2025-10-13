@@ -80,3 +80,9 @@ class Program
 Thoroughly explain these concepts:
 
 Inheritance is a fundamental principle of object-oriented programming that allows one class to reuse the attributes and methods of another class. The class that provides the behaviors is called the base class or superclass, while the class that inherits is called the derived class or subclass. Inheritance reduces code duplication, facilitates maintenance, and allows for more flexible programs. Inheritance is a powerful principle that can save many hours of coding.
+
+W06 : Explain Polymorphism
+
+Explain the meaning of Polymorphism
+
+Polymorphism is the ability to take on many forms
