@@ -1,88 +1,124 @@
 # cse210-ww-student-template
 This is the starter code for students in the worldwide content version of CSE 210.
 
-W05 : Explain Inheritance
-
-Explain the meaning of Inheritance:
-
-Inheritance is the ability for me class to obtain the attributes and methods of another class directly .It follows the same idea of people inheriting certain characteristices from their 
-
-Highlight a benefit of Inheritance:
-
-Inheritance allows a class to reuse or inherit code from another class, thus reducing duplication and simplifying program maintenance. It also allows for organization. Shared behaviors and attributes can be placed in a base class. Finally, it makes programs more flexible because new classes can be created by extending existing classes without modifying the original code.
-
-Provide an application of Inheritance:
-
-In the Mindfulness Week program, we can use a base class called Activity, with shared attributes like Name, Description, and Duration, as well as shared methods like StartMessage() and EndMessage(). Then we create derived classes, such as BreathingActivity, ReflectingActivity, and ListingActivity, that inherit from Activity. Each derived class can have its own behavior, while still reusing Activity's shared code.
-
-Example Code :
-
-Here is some sample code from the program that illustrates inheritance
-
-using System;
-
-public class Activity
-{
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public int Duration { get; set; }
-
-    public Activity(string name, string description, int duration)
-    {
-        Name = name;
-        Description = description;
-        Duration = duration;
-    }
-
-    public void StartMessage()
-    {
-        Console.WriteLine($"Starting {Name} for {Duration} seconds...");
-    }
-
-    public void EndMessage()
-    {
-        Console.WriteLine($"You have completed {Name}. Well done!");
-    }
-}
-
-// Derived class
-public class BreathingActivity : Activity
-{
-    public BreathingActivity(string name, string description, int duration)
-        : base(name, description, duration)
-    {
-    }
-
-    public void Run()
-    {
-        StartMessage();
-        Console.WriteLine("Breathe in...");
-        Console.WriteLine("Breathe out...");
-        EndMessage();
-    }
-}
-
-// Example usage
-class Program
-{
-    static void Main()
-    {
-        BreathingActivity breathing = new BreathingActivity(
-            "Breathing Activity",
-            "Helps you relax by focusing on breathing slowly.",
-            10
-        );
-
-        breathing.Run();
-    }
-}
-
-Thoroughly explain these concepts:
-
-Inheritance is a fundamental principle of object-oriented programming that allows one class to reuse the attributes and methods of another class. The class that provides the behaviors is called the base class or superclass, while the class that inherits is called the derived class or subclass. Inheritance reduces code duplication, facilitates maintenance, and allows for more flexible programs. Inheritance is a powerful principle that can save many hours of coding.
-
 W06 : Explain Polymorphism
 
 Explain the meaning of Polymorphism
 
-Polymorphism is the ability to take on many forms
+Polymorphism is the ability to take many forms. In programming, this principle is illustrated by the different behavior of the same line of code depending on the context. In other words, it allows a single interface to represent different underlying forms.
+
+Highlight an advantage of polymorphism
+
+Polymorphism gives programs greater flexibility and scalability. It allows code to be written that is compatible with objects of different classes without knowing their exact type, thus reducing code duplication and improving maintainability.
+
+Provide an application of polymorphism
+
+In the Eternal Quest program, we have a base class "Goal" and derived classes "SimpleGoal", "EternalGoal", and "CheckListGoal". All of these classes have the "RecordEvent()" method. When we call "RecordEvent()" on a "Goal" object, the program automatically executes the correct version of the method depending on the goal type. This is polymorphism: the same method name behaves differently for each goal type.
+
+Code Example
+
+using System;
+using System.Collections.Generic;
+
+//Base Class
+public class Goal
+{
+protected string _name;
+protected string _description;
+protected int _points;
+protected bool _isCompleted;
+
+public Goal(string name, string description, int points, bool isCompleted)
+{
+_name = name;
+_description = description;
+_points = points;
+_isCompleted = isCompleted; }
+
+public virtual int RecordEvent()
+{
+if (!_isCompleted)
+{
+_isCompleted = true;
+Console.WriteLine($"You have completed {_name} and earned {_points} points!");
+return _points;
+}
+return 0;
+}
+}
+
+// Derived class 1
+public class SimpleGoal: Goal
+{
+public SimpleGoal(string name, string description, int points)
+: base(name, description, points, false) { }
+
+public override int RecordEvent()
+{
+Console.WriteLine($"Simple Goal {_name} completed! Points: {_points}");
+_isCompleted = true;
+return _points;
+}
+}
+
+// Derived Class 2
+public class EternalGoal: Goal
+{
+public EternalGoal(string name, string description, int points)
+: base(name, description, points, false) { }
+
+public override int RecordEvent()
+{
+Console.WriteLine($"Eternal Goal {_name} recorded! Points: {_points}");
+return _points;
+}
+}
+
+// Derived Class 3
+public class CheckListGoal: Goal
+{
+private int _currentCount = 0;
+private int _targetCount;
+private int _bonusPoints;
+
+public CheckListGoal(string name, string description, int points, int targetCount, int bonusPoints)
+: base(name, description, points, false)
+{
+_targetCount = targetCount;
+_bonusPoints = bonusPoints; }
+
+public override int RecordEvent()
+{
+_currentCount++;
+if (_currentCount >= _targetCount && !_isCompleted)
+{
+_isCompleted = true;
+Console.WriteLine($"Checklist goal {_name} achieved! Points: {_points + _bonusPoints}");
+return _points + _bonusPoints;
+}
+Console.WriteLine($"Progress on {_name}: {_currentCount}/{_targetCount} (Points: {_points})");
+return _points;
+}
+}
+
+// Example Usage
+Program Class
+{
+    static void Main()
+    {
+    List<Goal> goals = new List<Goal>
+    {
+    new SimpleGoal("Read Scriptures", "Read a Chapter", 50),
+    new EternalGoal("Meditate", "Daily Meditation", 20),
+    new CheckListGoal("Temple Visits", "Visit the temple 5 times", 10, 5, 50)
+    };
+
+    foreach (Goal goal in goals)
+    {
+    goal.RecordEvent(); // Polymorphism: The same method behaves differently
+    }}
+}
+
+Explain these concepts in detail
+
+Polymorphism allows a method, such as `RecordEvent()`, to behave differently depending on the type of object it is called on. This means that the program can handle "SimpleGoal", "EternalGoal", and "CheckListGoal" objects in the same way, without knowing their exact types. Polymorphism is essential for flexibility, code reuse, and clean design in object-oriented programming.
