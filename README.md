@@ -1,125 +1,52 @@
 # cse210-ww-student-template
 This is the starter code for students in the worldwide content version of CSE 210.
 
-W06: Explain Polymorphism
+W07 : Expalain Programming with Classes 
 
-Explain the meaning of polymorphism
+I - Abstraction
 
-Polymorphism is the ability to take many forms. In programming, this principle is illustrated by the different behavior of the same line of code depending on the context. In other words, it allows a single interface to represent different underlying forms.
+Definition:
+Abstraction is the process of simplifying complex ideas. Reducing the object plays a key role. As programmers, we constantly create and use abstractions. In practice, we create public classes and methods that represent actions, while hiding internal data structures and implementation details.
 
-Highlight an advantage of polymorphism
+Example in a program:
+In the YouTube Videos project, I created the `Video` class that contains the main information about a video, such as the title, author, and duration. Comments are managed via a separate `Comment` class. The user can interact with the videos and view the information without knowing how the comments are stored or processed.
 
-Polymorphism gives programs greater flexibility and scalability. It allows code to be written that is compatible with objects of different classes without knowing their exact type, thus reducing code duplication and improving maintainability.
+Future Flexibility:
+Thanks to abstraction, if I want to add additional features, such as likes or views, I can modify the `Video` or `Comment` class without changing the code that uses these classes. The public interface remains the same, making the program easy to extend.
 
-Provide an application of polymorphism
+II - Encapsulation
 
-In the Eternal Quest program, we have a base class "Goal" and derived classes "SimpleGoal", "EternalGoal", and "CheckListGoal". All of these classes have the "RecordEvent()" method. When we call "RecordEvent()" on a "Goal" object, the program automatically executes the correct version of the method depending on the goal type. This is polymorphism: the same method name behaves differently for each goal type.
+Definition:
+Encapsulation is the act of enclosing something, such as in a capsule. This involves defining the behaviors we need for our classes and hiding the implementation details and preventing other parts of the program from accessing these details.
 
-Code Example
+Example in a program:
+In the Online Ordering project, the `Customer` class contains an `Address` object. The `_name` and `_address` attributes are private, and access is via `GetCustomerName()` and `GetAddress()`. The `Order` class can use these methods without directly accessing the internal variables.
 
+Future Flexibility:
+Encapsulation allows you to change the internal implementation of the `Address` or `Customer` class (such as adding a city or postal code) without impacting the rest of the program. Other classes still interact via public methods.
 
-using System;
-using System.Collections.Generic;
+III - Inheritance
 
-//Base Class
-public class Goal
-{
-protected string _name;
-protected string _description;
-protected int _points;
-protected bool _isCompleted;
+Definition:
+Inheritance allows one class to obtain the attributes and methods of another class. The base class provides common behaviors, and derived classes can reuse or extend them.
 
-public Goal(string name, string description, int points, bool isCompleted)
-{
-_name = name;
-_description = description;
-_points = points;
-_isCompleted = isCompleted; }
+Example in a program:
+In the Mindfulness project, I created a base class `Activity` with attributes such as `Name`, `Description`, and `Duration`, as well as methods such as `StartMessage()` and `EndMessage()`. The derived classes `BreathingActivity`, `ReflectingActivity`, and `ListingActivity` inherit from `Activity` and add behaviors specific to each type of activity.
 
-public virtual int RecordEvent()
-{
-if (!_isCompleted)
-{
-_isCompleted = true;
-Console.WriteLine($"You have completed {_name} and earned {_points} points!");
-return _points;
-}
-return 0;
-}
-}
+Future Flexibility:
+Inheritance makes it easy to add new activities by creating new derived classes. The existing code for the base activities does not need to be modified, making the program modular and extensible.
 
-// Derived class 1
-public class SimpleGoal: Goal
-{
-public SimpleGoal(string name, string description, int points)
-: base(name, description, points, false) { }
+IV - Polymorphism
 
-public override int RecordEvent()
-{
-Console.WriteLine($"Simple Goal {_name} completed! Points: {_points}");
-_isCompleted = true;
-return _points;
-}
-}
+Definition:
+Polymorphism allows objects from different classes, but related by inheritance, to respond differently to the same method. A single interface can represent multiple implementation forms.
 
-// Derived Class 2
-public class EternalGoal: Goal
-{
-public EternalGoal(string name, string description, int points)
-: base(name, description, points, false) { }
+Example in a program:
+In the Eternal Quest project, I created a base class `Goal` and derived classes `SimpleGoal`, `EternalGoal`, and `CheckListGoal`. All have the `RecordEvent()` method. When I call `RecordEvent()` on a `Goal` object, the correct version is executed based on the object's actual type, without needing to know its exact type.
 
-public override int RecordEvent()
-{
-Console.WriteLine($"Eternal Goal {_name} recorded! Points: {_points}");
-return _points;
-}
-}
+Future Flexibility:
+Polymorphism makes it easy to add new types of goals without changing the code that manages the goals. For example, I can create `NegativeGoal` where the points are lost, and `RecordEvent()` will work automatically thanks to polymorphism.
 
-// Derived Class 3
-public class CheckListGoal: Goal
-{
-private int _currentCount = 0;
-private int _targetCount;
-private int _bonusPoints;
+Overall Summary
 
-public CheckListGoal(string name, string description, int points, int targetCount, int bonusPoints)
-: base(name, description, points, false)
-{
-_targetCount = targetCount;
-_bonusPoints = bonusPoints; }
-
-public override int RecordEvent()
-{
-_currentCount++;
-if (_currentCount >= _targetCount && !_isCompleted)
-{
-_isCompleted = true;
-Console.WriteLine($"Checklist goal {_name} achieved! Points: {_points + _bonusPoints}");
-return _points + _bonusPoints;
-}
-Console.WriteLine($"Progress on {_name}: {_currentCount}/{_targetCount} (Points: {_points})");
-return _points;
-}
-}
-
-// Example Usage
-Program Class
-{
-static void Main()
-{
-List<Goal> goals = new List<Goal>
-{
-new SimpleGoal("Read Scriptures", "Read a Chapter", 50),
-new EternalGoal("Meditate", "Daily Meditation", 20),
-new CheckListGoal("Temple Visits", "Visit the temple 5 times", 10, 5, 50)
-};
-
-foreach (Goal goal in goals)
-{
-goal.RecordEvent(); // Polymorphism: The same method behaves differently
-}
-}}
-
-Explain these concepts in detail
-
-Polymorphism allows a method, such as `RecordEvent()`, to behave differently depending on the type of object it is called on. This means that the program can handle "SimpleGoal", "EternalGoal", and "CheckListGoal" objects in the same way, without knowing their exact types. Polymorphism is essential for flexibility, code reuse, and clean design in object-oriented programming.
+These four principles—abstraction, encapsulation, inheritance, and polymorphism—make programs more modular, maintainable, and easy to extend. Each principle enables the separation of responsibilities, data protection, code reuse, and consistent handling of different objects, which is essential for developing flexible and scalable applications.
